@@ -43,6 +43,16 @@ export default app;
 ```
 create `.env.local` file in your application and collect credentials from firebase and then set these in the env file
 
+#### 4. [React-Bootstrap](https://react-bootstrap.github.io/)
+  ```bash
+  npm install react-bootstrap bootstrap
+  ```
+  and then goto `src/index.js` and paste the bellow code.
+  ```bash
+  import 'bootstrap/dist/css/bootstrap.min.css';
+  import 'bootstrap/dist/js/bootstrap.min.js';
+  ```
+
 <br>
 
 
