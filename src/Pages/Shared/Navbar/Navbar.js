@@ -7,6 +7,13 @@ const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext);
 
+    const handleLogOut = () => {
+        logOut()
+        .then(() => {
+            // localStorage.removeItem("travelServiceToken");
+         })
+        .catch(error => console.error(error));
+    }
 
     const menuItems = <React.Fragment>
         <li className="nav-item"><Link className="nav-link px-2 link-dark" to="/">Home</Link></li>
@@ -28,8 +35,16 @@ const Navbar = () => {
             </ul>
 
             <div className="col-md-3 text-end">
-                <Link type="button" className="btn btn-outline-primary me-2">Login</Link>
-                <Link to='/signup' type="button" className="btn btn-outline-primary">Sign-up</Link>
+                {
+                    user?.email ?
+                    <button onClick={handleLogOut} type="button" className="btn btn-outline-danger">Logout</button>
+                    :
+                    <>
+                        <Link to='/login' type="button" className="btn btn-outline-primary me-2">Login</Link>
+                        <Link to='/signup' type="button" className="btn btn-outline-primary">Sign-up</Link>
+                    </>                    
+                }
+
             </div>
         </header>
     );
