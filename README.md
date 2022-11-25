@@ -58,6 +58,11 @@ create `.env.local` file in your application and collect credentials from fireba
   npm install react-icons --save
   ```
 
+#### 5. [React-Toastify](https://www.npmjs.com/package/react-toastify)
+  ```bash
+  npm install --save react-toastify
+  ```
+
 <br>
 
 

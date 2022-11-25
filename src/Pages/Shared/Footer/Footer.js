@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <section className="my-5 text-center text-lg-start text-white" style={{backgroundColor:"#45526e"}}>
+        <section className="container my-5 text-center text-lg-start text-white" style={{backgroundColor:"#45526e"}}>
             <div className="row d-flex align-items-center">
                 <div className="col-md-7 col-lg-8 text-center text-md-start">
                     <div className="p-3">© 2020 Copyright:
