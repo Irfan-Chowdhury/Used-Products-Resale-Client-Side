@@ -17,7 +17,7 @@ const Navbar = () => {
 
     const menuItems = <React.Fragment>
         <li className="nav-item"><Link className="nav-link px-2 link-dark" to="/">Home</Link></li>
-        <li className="nav-item"><Link className="nav-link px-2 link-dark" to="/">Blogs</Link></li>
+        <li className="nav-item"><Link className="nav-link px-2 link-dark" to="/blogs">Blogs</Link></li>
     </React.Fragment>
 
     return (
