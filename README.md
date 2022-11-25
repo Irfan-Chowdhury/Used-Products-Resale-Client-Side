@@ -53,6 +53,11 @@ create `.env.local` file in your application and collect credentials from fireba
   import 'bootstrap/dist/js/bootstrap.min.js';
   ```
 
+#### 5. [React-Icon](https://react-icons.github.io/react-icons/)
+  ```bash
+  npm install react-icons --save
+  ```
+
 <br>
 
 
