@@ -47,6 +47,26 @@ const MyProducts = () => {
         });
     }
 
+
+    // Product Delete
+    const handleDelete = (productId) => {
+        console.log(productId);
+
+        const proceed = window.confirm('Are you sure to delete ?');
+        if (proceed) {
+            fetch(`http://localhost:5000/products/${productId}`, {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    refetch();
+                    successMessage();
+                }
+            });
+        }
+    }
+
     return (
         <div className='container'>
             {
@@ -114,7 +134,7 @@ const MyProducts = () => {
                                 </td>
                                 <td>
 
-                                    <button className='ms-2 btn btn-danger'>Delete</button>
+                                    <button onClick={()=>handleDelete(product._id)} className='ms-2 btn btn-danger'>Delete</button>
                                 </td>
                             </tr>   
                         )
