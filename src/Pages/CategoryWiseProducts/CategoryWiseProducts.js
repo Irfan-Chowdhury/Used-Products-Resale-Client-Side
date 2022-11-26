@@ -25,7 +25,7 @@ const CategoryWiseProducts = () => {
 
                         <div className="col">
                             <div className="card h-100">
-                                <img src={product.image} className="card-img-top" alt="..." />
+                                <img src={product.image} className="card-img-top" alt="..." style={{height:'350px'}}/>
                                 <div className="card-body">
                                     <h5 className="card-title">{product.title}</h5>
                                     <p className="card-text"> <b>Location :</b> {product.location}</p>

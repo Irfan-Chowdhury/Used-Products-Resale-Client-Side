@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { useForm } from 'react-hook-form';
 import useTitle from '../../../hooks/useTitle';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../../Shared/Loading/Loading';
 
 const AddProduct = () => {
     useTitle('Add Product');
@@ -12,6 +13,7 @@ const AddProduct = () => {
     const imageHostKey = process.env.REACT_APP_imgbb_key;
     const navigate = useNavigate();
 
+    const [isLoading, setLoading] = useState(false);
 
     const { data: categories } = useQuery({
         queryKey: ['category'],
@@ -23,6 +25,7 @@ const AddProduct = () => {
     });
 
     const handleProductSubmit = data => {
+        setLoading(true);
         const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image);
@@ -61,6 +64,7 @@ const AddProduct = () => {
                 })
                 .then(res => res.json())
                 .then(result =>{
+                    setLoading(false);
                     successMessage();
                     navigate('/my-products')
                 })
@@ -68,8 +72,13 @@ const AddProduct = () => {
         });
     }
 
+    if(isLoading){
+        return <Loading></Loading>
+    }
+
     return (
         <div className='container'>
+            
             <div className="card">
                 <div className="card-header text-center">
                     <h2>Add Products</h2>
