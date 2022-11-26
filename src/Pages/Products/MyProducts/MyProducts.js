@@ -50,8 +50,6 @@ const MyProducts = () => {
 
     // Product Delete
     const handleDelete = (productId) => {
-        console.log(productId);
-
         const proceed = window.confirm('Are you sure to delete ?');
         if (proceed) {
             fetch(`http://localhost:5000/products/${productId}`, {

@@ -7,6 +7,8 @@
 - Firebase Authentication
 - Google Login
 - Product create, edit, delete
+- Authorization
+- Category Wise Product Show
 
 
 ## `PACKAGES SETUP`
