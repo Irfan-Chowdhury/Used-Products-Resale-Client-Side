@@ -16,7 +16,7 @@ const Categories = () => {
             {
                 categories.map(category => 
                     <div key={category._id} className="col">
-                        <Link to={`/categories/${category._id}`} style={{textDecoration:'none'}}>
+                        <Link to={`/category/${category._id}`} style={{textDecoration:'none'}}>
                             <div className="card">
                                 <img src={category.img} className="card-img-top" height={80} alt="..." />
                                 <div className="card-body">
@@ -27,7 +27,6 @@ const Categories = () => {
                     </div>
                 )
             }
-
         </div>
     );
 };

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 
 const CategoryWiseProducts = () => {
+    useTitle('Category Wise Products');
     const { _id, title } = useLoaderData();
 
     const [products, setProducts] = useState([]);
@@ -16,7 +18,6 @@ const CategoryWiseProducts = () => {
 
     return (
         <div className='container'>
-
             <h1 className='text-center'>{title}</h1>
             <hr />
             <div className="mt-5 row row-cols-1 row-cols-md-3 g-4">
@@ -34,7 +35,7 @@ const CategoryWiseProducts = () => {
                                     <p className="card-text"> <b>Phone:</b> {product.phone} </p>
 
                                     <div class="d-grid gap-2">
-                                        <Link to='/' class="btn btn-primary">Details</Link>
+                                        <Link to='/' class="btn btn-primary">Book Now</Link>
                                     </div>
                                 </div>
                             </div>
