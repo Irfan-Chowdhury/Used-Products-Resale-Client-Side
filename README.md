@@ -3,6 +3,10 @@
 # E-Recycle-Phone
 </div>
 
+## `Features & Functionalities`
+- Firebase Authentication
+- Google Login
+- Product create, edit, delete
 
 
 ## `PACKAGES SETUP`
@@ -58,10 +62,24 @@ create `.env.local` file in your application and collect credentials from fireba
   npm install react-icons --save
   ```
 
-#### 5. [React-Toastify](https://www.npmjs.com/package/react-toastify)
+#### 6. [React-Toastify](https://www.npmjs.com/package/react-toastify)
   ```bash
   npm install --save react-toastify
   ```
+#### 7. [React-Toastify](https://react-hot-toast.com/)
+  ```bash
+  npm install react-hot-toast
+  ```
+#### 8. [Tanstack Query](https://tanstack.com/)
+```bash
+npm i @tanstack/react-query
+```
+#### 8. [React Hook Form](https://react-hook-form.com/)
+```bash
+npm install react-hook-form
+```
+
+#### 9. Third party image hosting server [Imgbb](https://imgbb.com/)
 
 <br>
 

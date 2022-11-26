@@ -18,6 +18,13 @@ const Navbar = () => {
     const menuItems = <React.Fragment>
         <li className="nav-item"><Link className="nav-link px-2 link-dark" to="/">Home</Link></li>
         <li className="nav-item"><Link className="nav-link px-2 link-dark" to="/blogs">Blogs</Link></li>
+        {
+            user?.email ?
+            <li className="nav-item"><Link className="nav-link px-2 link-dark" to="/add-product">Add Product</Link></li>
+            :
+            <>
+            </>
+        }
     </React.Fragment>
 
     return (
@@ -37,7 +44,17 @@ const Navbar = () => {
             <div className="col-md-3 text-end">
                 {
                     user?.email ?
-                    <button onClick={handleLogOut} type="button" className="btn btn-outline-danger">Logout</button>
+                    <div className='d-flex justify-content-center'>
+                        <button onClick={handleLogOut} type="button" className="btn btn-outline-danger">Logout</button>
+                        <div className="ms-2 dropdown text-end">
+                            <a href="/" className="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src={user?.photoURL} alt="mdo" width="32" height="32" className="rounded-circle" />
+                            </a>
+                            <ul className="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                                <li><a className="dropdown-item" href="/">{user?.displayName}</a></li>
+                            </ul>
+                        </div>
+                    </div>
                     :
                     <>
                         <Link to='/login' type="button" className="btn btn-outline-primary me-2">Login</Link>

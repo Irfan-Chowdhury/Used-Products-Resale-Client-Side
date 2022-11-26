@@ -1,16 +1,13 @@
 [
     {
-        "_id":"01",
         "title": "SAMSUNG",
         "img": "https://thumbs.dreamstime.com/b/glowing-samsung-electronics-logo-building-facade-night-entrance-to-electronics-store-samsung-logo-168531996.jpg"    
     },
     {
-        "_id":"02",
         "title": "SYMPHONY",
         "img": "https://techsathi.com/wp-content/uploads/2022/02/Symphony-Mobile.jpg"    
     },
     {
-        "_id":"03",
         "title": "XIAOMI",
         "img": "data:image/png;base64,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"    
     }

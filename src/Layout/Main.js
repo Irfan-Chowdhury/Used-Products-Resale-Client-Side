@@ -8,7 +8,11 @@ const Main = () => {
         <div>
             <Navbar></Navbar>
             <Outlet></Outlet>
-            <Footer></Footer>
+
+            <div style={{marginTop:'400px'}}>
+                <Footer></Footer>
+            </div>
+            
         </div>
     );
 };

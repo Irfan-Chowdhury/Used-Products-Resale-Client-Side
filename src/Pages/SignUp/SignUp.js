@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import signup from '../../assets/signup.png';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useTitle from '../../hooks/useTitle';
@@ -23,41 +24,47 @@ const SignUp = () => {
 
         createUser(email, password)
         .then(result => {
-            // const user = result.user;
-            // const currentuser = {
-            //     email: user.email
-            // }
-
+            toast('Registration Successfully.');
+            const profile = {
+                displayName: name,
+                photoURL: photoURL
+            }
+            updateUserProfile(profile);
+            saveUser(name, email, photoURL, userType);
             form.reset();
-            handleUpdateUserProfile(name, photoURL);
-
-            // get JWT token
-            // fetch('https://service-review-server-murex.vercel.app/jwt',{
-            //     method:'POST',
-            //     headers:{
-            //         'content-type':'application/json'
-            //     },
-            //     body:JSON.stringify(currentuser)
-            // })
-            // .then(res => res.json())
-            // .then(data => {
-            //     // local storage is the easiest but not the best place to store jwt token
-            //     localStorage.setItem('travelServiceToken',data.token);
-                navigate('/');
-            // });
+            navigate('/');
         })
         .catch(err => console.error(err));
     }
 
-    const handleUpdateUserProfile = (name, photoURL) =>{
-        const profile = {
-            displayName: name,
-            photoURL: photoURL
-        }
-        updateUserProfile(profile)
-        .then(() => {})
-        .catch(error => console.error(error));
+    const saveUser = (name, email, photoURL, userType) =>{
+        const user ={name, email, photoURL, userType};
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data =>{
+            // setCreatedUserEmail(email)
+            // console.log(data);
+            // navigate('/');
+            // setCreatedUserEmail(email);
+        })
+        .catch(err => console.error(err));
     }
+
+    // const handleUpdateUserProfile = (name, photoURL) =>{
+    //     const profile = {
+    //         displayName: name,
+    //         photoURL: photoURL
+    //     }
+    //     updateUserProfile(profile)
+    //     .then(() => {})
+    //     .catch(error => console.error(error));
+    // }
 
     return (
         <div className="container col-xl-10 col-xxl-8 px-4 py-5 bg-light">
