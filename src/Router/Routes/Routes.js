@@ -5,6 +5,7 @@ import CategoryWiseProducts from "../../Pages/CategoryWiseProducts/CategoryWiseP
 import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
 import AddProduct from "../../Pages/Products/AddProduct/AddProduct";
+import MyProducts from "../../Pages/Products/MyProducts/MyProducts";
 import NotFound404 from "../../Pages/Shared/NotFound404/NotFound404";
 import SignUp from "../../Pages/SignUp/SignUp";
 
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             {
                 path:'/add-product',
                 element:<AddProduct></AddProduct>,
+            },
+            {
+                path:'/my-products',
+                element:<MyProducts></MyProducts>,
             },
         ]
     },

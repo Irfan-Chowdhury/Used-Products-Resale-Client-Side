@@ -20,7 +20,10 @@ const Navbar = () => {
         <li className="nav-item"><Link className="nav-link px-2 link-dark" to="/blogs">Blogs</Link></li>
         {
             user?.email ?
-            <li className="nav-item"><Link className="nav-link px-2 link-dark" to="/add-product">Add Product</Link></li>
+            <>
+                <li className="nav-item"><Link className="nav-link px-2 link-dark" to="/add-product">Add Product</Link></li>
+                <li className="nav-item"><Link className="nav-link px-2 link-dark" to="/my-products">My Products</Link></li>
+            </>
             :
             <>
             </>
