@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import useTitle from '../../hooks/useTitle';
+import { MdVerifiedUser } from 'react-icons/md';
 
 const CategoryWiseProducts = () => {
     useTitle('Category Wise Products');
@@ -17,6 +18,19 @@ const CategoryWiseProducts = () => {
         })
     })
 
+    const {data: sellers = [], refetch} = useQuery({
+        queryKey: ['sellers'],
+        queryFn: async() =>{
+            const res = await fetch('http://localhost:5000/all-sellers');
+            const data = await res.json();
+            return data;
+        }
+    });
+
+    // console.log(sellers);
+
+    
+
     return (
         <div className='container'>
             <h1 className='text-center'>{title}</h1>
@@ -25,18 +39,28 @@ const CategoryWiseProducts = () => {
                 {
                     products.map(product => 
 
-                        <div className="col">
+                        <div key={product._id} className="col">
                             <div className="card h-100">
                                 <img src={product.image} className="card-img-top" alt="..." style={{height:'350px'}}/>
                                 <div className="card-body">
                                     <h5 className="card-title">{product.title}</h5>
                                     <p className="card-text"> <b>Location :</b> {product.location}</p>
                                     <p className="card-text"> <b>Price :</b> ৳ {product.resale_price}</p>
-                                    <p className="card-text"> <b>Posted By:</b> {product.seller_name} </p>
+                                    <p className="card-text">
+                                         <b>Posted By:</b> {product.seller_name} 
+                                         {
+                                            sellers.length > 0 &&
+                                            sellers?.find(seller=> seller.email===product.seller_email).verify === 1 ?
+                                            <span className="ms-1 text-success"><MdVerifiedUser></MdVerifiedUser></span>
+                                            :
+                                            <></>
+                                         }
+                                    
+                                    </p>
                                     <p className="card-text"> <b>Phone:</b> {product.phone} </p>
 
-                                    <div class="d-grid gap-2">
-                                        <Link to='/' class="btn btn-primary">Book Now</Link>
+                                    <div className="d-grid gap-2">
+                                        <Link to='/' className="btn btn-primary">Book Now</Link>
                                     </div>
                                 </div>
                             </div>
