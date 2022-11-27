@@ -43,7 +43,7 @@ const AllSellers = () => {
     const handleDeleteSeller = id => {
         const proceed = window.confirm('Are you sure to delete ?');
         if (proceed) {
-            fetch(`http://localhost:5000/all-sellers/${id}`, {
+            fetch(`http://localhost:5000/users/${id}`, {
                 method: 'DELETE', 
                 // headers: {
                 //     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -58,8 +58,6 @@ const AllSellers = () => {
             })
         }
     }
-
-
 
     return (
         <div>

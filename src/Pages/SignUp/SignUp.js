@@ -79,9 +79,9 @@ const SignUp = () => {
 
                         <div className='d-flex flex-row bd-highlight mb-3'>
                             <div className="form-check">
-                                <input className="form-check-input" defaultChecked type="radio" name="role" value='user' />
+                                <input className="form-check-input" defaultChecked type="radio" name="role" value='buyer' />
                                 <label className="form-check-label">
-                                    User
+                                    Buyers
                                 </label>
                             </div>
                             <div className="mx-3 form-check">

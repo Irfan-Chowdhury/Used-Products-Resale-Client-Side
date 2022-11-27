@@ -12,7 +12,7 @@ const DashboardLayout = () => {
                 <div className="col-md-3">
                     <ul>
                         <li><Link to='/dashboard/all-sellers'>Manage Sellers</Link></li>
-                        <li><Link to='/dashboard/all-users'>Manage Buyers</Link></li>
+                        <li><Link to='/dashboard/all-buyers'>Manage Buyers</Link></li>
                     </ul>
                 </div>
                 <div className="col-md-9">
