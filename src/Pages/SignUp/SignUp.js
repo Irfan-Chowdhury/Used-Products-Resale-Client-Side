@@ -15,12 +15,13 @@ const SignUp = () => {
     const handleSignUp = event => {
         event.preventDefault();
         const form = event.target;
-        const userType = form.user_type.value;
+        const role = form.role.value;
         const name = form.name.value;
         const photoURL = form.photo_url.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(userType, name, photoURL, email, password);
+        const verify = 0;
+        // console.log(role, name, photoURL, email, password);
 
         createUser(email, password)
         .then(result => {
@@ -30,15 +31,15 @@ const SignUp = () => {
                 photoURL: photoURL
             }
             updateUserProfile(profile);
-            saveUser(name, email, photoURL, userType);
+            saveUser(name, email, photoURL, role,verify);
             form.reset();
             navigate('/');
         })
         .catch(err => console.error(err));
     }
 
-    const saveUser = (name, email, photoURL, userType) =>{
-        const user ={name, email, photoURL, userType};
+    const saveUser = (name, email, photoURL, role,verify) =>{
+        const user ={name, email, photoURL, role,verify};
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
@@ -78,13 +79,13 @@ const SignUp = () => {
 
                         <div className='d-flex flex-row bd-highlight mb-3'>
                             <div className="form-check">
-                                <input className="form-check-input" defaultChecked type="radio" name="user_type" value='user' />
+                                <input className="form-check-input" defaultChecked type="radio" name="role" value='user' />
                                 <label className="form-check-label">
                                     User
                                 </label>
                             </div>
                             <div className="mx-3 form-check">
-                                <input className="form-check-input" type="radio" name="user_type" value='seller'/>
+                                <input className="form-check-input" type="radio" name="role" value='seller'/>
                                 <label className="form-check-label">
                                     Seller
                                 </label>

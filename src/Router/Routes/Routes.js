@@ -1,7 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import Blog from "../../Pages/Blog/Blog";
 import CategoryWiseProducts from "../../Pages/CategoryWiseProducts/CategoryWiseProducts";
+import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
+import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
+import Dashboard from "../../Pages/Dashboard/Dashboard";
 import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
 import AddProduct from "../../Pages/Products/AddProduct/AddProduct";
@@ -45,6 +49,25 @@ const router = createBrowserRouter([
             },
         ]
     },
+    {
+        path: '/dashboard',
+        element: <DashboardLayout></DashboardLayout>,
+        children:[
+            {
+                path:'/dashboard',
+                element:<Dashboard></Dashboard>
+            },
+            {
+                path:'/dashboard/all-sellers',
+                element:<AllSellers></AllSellers>
+            },
+            {
+                path:'/dashboard/all-users',
+                element:<AllUsers></AllUsers>
+            },
+        ]
+    },
+
     { 
         path: '*', 
         element: <NotFound404></NotFound404>

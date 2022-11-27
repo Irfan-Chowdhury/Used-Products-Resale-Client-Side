@@ -47,7 +47,19 @@ const AuthProvider = ({children}) => {
         return () => {
             return unsubscribe();
         }
-    }, [])
+    }, []);
+
+    // const deleteData = () =>{
+    //     // return getAuth().deleteUser('xzn04t34LHR6it5bnPvrfILe3oM2');
+    //     getAuth()
+    //     .deleteUser('xzn04t34LHR6it5bnPvrfILe3oM2')
+    //     .then(() => {
+    //       console.log('Successfully deleted user');
+    //     })
+    //     .catch((error) => {
+    //       console.log('Error deleting user:', error);
+    //     });
+    // }
 
 
     // Toast
@@ -72,7 +84,8 @@ const AuthProvider = ({children}) => {
         logIn,
         logOut,
         updateUserProfile,
-        successMessage
+        successMessage,
+        // deleteData
     }
 
     return (
