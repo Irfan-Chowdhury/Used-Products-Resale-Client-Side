@@ -18,7 +18,7 @@ const CategoryWiseProducts = () => {
         })
     })
 
-    const {data: sellers = [], refetch} = useQuery({
+    const {data: sellers = []} = useQuery({
         queryKey: ['sellers'],
         queryFn: async() =>{
             const res = await fetch('http://localhost:5000/all-sellers');

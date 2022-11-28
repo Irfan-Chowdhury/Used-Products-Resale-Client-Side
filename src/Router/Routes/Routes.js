@@ -43,11 +43,11 @@ const router = createBrowserRouter([
             },
             {
                 path:'/add-product',
-                element:<AddProduct></AddProduct>,
+                element:<PrivateRoute><AddProduct></AddProduct></PrivateRoute>,
             },
             {
                 path:'/my-products',
-                element:<MyProducts></MyProducts>,
+                element:<PrivateRoute><MyProducts></MyProducts></PrivateRoute>,
             },
         ]
     },
@@ -69,7 +69,6 @@ const router = createBrowserRouter([
             },
         ]
     },
-
     { 
         path: '*', 
         element: <NotFound404></NotFound404>
