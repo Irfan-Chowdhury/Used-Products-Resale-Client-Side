@@ -76,12 +76,17 @@ create `.env.local` file in your application and collect credentials from fireba
 ```bash
 npm i @tanstack/react-query
 ```
-#### 8. [React Hook Form](https://react-hook-form.com/)
+#### 9. [React Hook Form](https://react-hook-form.com/)
 ```bash
 npm install react-hook-form
 ```
 
-#### 9. Third party image hosting server [Imgbb](https://imgbb.com/)
+#### 10. Third party image hosting server [Imgbb](https://imgbb.com/)
+
+#### 11. [date-fns](https://www.npmjs.com/package/date-fns/)
+```bash
+npm install date-fns --save
+```
 
 <br>
 
