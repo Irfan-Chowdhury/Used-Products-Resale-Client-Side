@@ -12,6 +12,7 @@ import MyProducts from "../../Pages/Products/MyProducts/MyProducts";
 import NotFound404 from "../../Pages/Shared/NotFound404/NotFound404";
 import SignUp from "../../Pages/SignUp/SignUp";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/category/:id',
-                element: <CategoryWiseProducts></CategoryWiseProducts>,
+                element: <PrivateRoute><CategoryWiseProducts></CategoryWiseProducts></PrivateRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/categories/${params.id}`)
             },
             {
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children:[
             {
                 path:'/dashboard',
