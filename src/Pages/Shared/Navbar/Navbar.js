@@ -3,11 +3,17 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import useAdmin from '../../../hooks/useAdmin';
+import useBuyer from '../../../hooks/useBuyer';
 import logo from './../../../assets/Logo.jpg';
 
 const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext);
+    const email = user?.email;
+
+    const checkAdmin = useAdmin(email)[0];
+    const checkBuyer = useBuyer(email)[0];
+    // console.log(checkBuyer);
 
     const handleLogOut = () => {
         logOut()
@@ -26,13 +32,13 @@ const Navbar = () => {
     //     }
     // });
 
-    const email = user?.email;
     const [seller, setSeller] = useState(null);
     useEffect(() => {
         fetch(`http://localhost:5000/users/seller/${email}`)
         .then(res => res.json())
         .then(data => setSeller(data))
     });
+
 
 
     const menuItems = <React.Fragment>
@@ -50,7 +56,15 @@ const Navbar = () => {
                     :
                     <></>
                 }
-                <li className="nav-item"><Link className="nav-link px-2 link-dark" to="/dashboard">Dashboard</Link></li>
+                {
+                    checkAdmin &&
+                    <li className="nav-item"><Link className="nav-link px-2 link-dark" to="/dashboard">Admin-Dashboard</Link></li>
+                }
+                {
+                    checkBuyer &&
+                    <li className="nav-item"><Link className="nav-link px-2 link-dark" to="/buyer-dashboard">Buyer-Dashboard</Link></li>
+                }
+
             </>
             :
             <>

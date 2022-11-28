@@ -9,18 +9,29 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 const CategoryWiseProducts = () => {
     useTitle('Category Wise Products');
     const { _id, title } = useLoaderData();
-    const {successMessage} = useContext(AuthContext);
+    const {user, successMessage} = useContext(AuthContext);
 
 
     const [products, setProducts] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/all-available-products')
-            .then(res => res.json())
-            .then(productData => {
-                const productsFilter = productData.filter(product => product.category_id === _id);
-                setProducts(productsFilter)
-            })
-    })
+        .then(res => res.json())
+        .then(productData => {
+            const productsFilter = productData.filter(product => product.category_id === _id);
+            setProducts(productsFilter)
+        });
+    });
+
+    // const {data: products=[], refetch} = useQuery({
+    //     queryKey: ['products'],
+    //     queryFn: async() =>{
+    //         const res = await fetch('all-available-products');
+    //         const data = await res.json();
+    //         return data.filter(product => product.category_id === _id);
+    //     }
+    // });
+
+
 
     const { data: sellers = [] } = useQuery({
         queryKey: ['sellers'],
@@ -30,6 +41,17 @@ const CategoryWiseProducts = () => {
             return data;
         }
     });
+
+
+    const [orders, setOrders] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/orders')
+        .then(res => res.json())
+        .then(data => {
+            setOrders(data)
+        });
+    },[])
+
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -76,21 +98,14 @@ const CategoryWiseProducts = () => {
         })
         .then(res => res.json())
         .then(result =>{
-            console.log(result);
-            if(result.acknowledged){
-               form.reset();
-               successMessage();
+                console.log(result);
+                if(result.acknowledged){
+                form.reset();
+                successMessage();
             }
-            // setLoading(false);
-            // successMessage();
-            // navigate('/my-products')
         })
         .catch(err => console.error(err));
-
     }
-
-
-
 
     return (
         <div className='container'>
@@ -98,36 +113,44 @@ const CategoryWiseProducts = () => {
             <hr />
             <div className="mt-5 row row-cols-1 row-cols-md-3 g-4">
                 {
-                    products.map(product =>
-                        <div key={product._id} className="col">
-                            <div className="card h-100">
-                                <img src={product.image} className="card-img-top" alt="..." style={{ height: '350px' }} />
-                                <div className="card-body">
-                                    <h5 className="card-title">{product.title}</h5>
-                                    <p className="card-text"> <b>Location :</b> {product.location}</p>
-                                    <p className="card-text"> <b>Price :</b> ৳ {product.resale_price}</p>
-                                    <p className="card-text">
-                                        <b>Posted By:</b> {product.seller_name}
-                                        {
-                                            sellers.length > 0 &&
-                                                sellers?.find(seller => seller.email === product.seller_email).verify === 1 ?
-                                                <span className="ms-1 text-success"><MdVerifiedUser></MdVerifiedUser></span>
-                                                :
-                                                <></>
-                                        }
+                    products.length > 0 &&
+                        products.map(product =>
+                            <div key={product._id} className="col">
+                                <div className="card h-100">
+                                    <img src={product.image} className="card-img-top" alt="..." style={{ height: '350px' }} />
+                                    <div className="card-body">
+                                        <h5 className="card-title">{product.title}</h5>
+                                        <p className="card-text"> <b>Location :</b> {product.location}</p>
+                                        <p className="card-text"> <b>Price :</b> ৳ {product.resale_price}</p>
+                                        <p className="card-text">
+                                            <b>Posted By:</b> {product.seller_name}
+                                            {
+                                                sellers.length > 0 &&
+                                                    sellers?.find(seller => seller.email === product.seller_email).verify === 1 ?
+                                                    <span className="ms-1 text-success"><MdVerifiedUser></MdVerifiedUser></span>
+                                                    :
+                                                    <></>
+                                            }
 
-                                    </p>
-                                    <p className="card-text"> <b>Phone:</b> {product.phone} </p>
+                                        </p>
+                                        <p className="card-text"> <b>Phone:</b> {product.phone} </p>
 
-                                    <div className="d-grid gap-2">
-                                        <Link to='/' className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#bookingModal-${product._id}`}>Book Now</Link>
+
+                                        <div className="d-grid gap-2">
+                                            {
+                                                orders.length > 0 &&
+                                                    orders?.find(order => order.product_id === product._id) ?
+                                                    <button type='button' className="btn btn-warning">Already Booked</button>
+                                                    :
+                                                    <Link to='/' className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#bookingModal-${product._id}`}>Book Now</Link>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <BookingModal handleSubmit={handleSubmit} product={product}></BookingModal>
-                        </div>
-                    )
+                                <BookingModal handleSubmit={handleSubmit} product={product}></BookingModal>
+                            </div>
+                        )
                 }
 
             </div>

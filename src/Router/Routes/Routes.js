@@ -14,6 +14,11 @@ import SignUp from "../../Pages/SignUp/SignUp";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import BuyerboardLayout from "../../Layout/BuyerboardLayout";
+import BuyerDashboard from "../../Pages/BuyerDashboard/BuyerDashboard";
+import BuyerRoute from "../BuyerRoute/BuyerRoute";
+import MyOrders from "../../Pages/BuyerDashboard/MyOrders/MyOrders";
+import MyWishlist from "../../Pages/BuyerDashboard/MyWishlist/MyWishlist";
 
 const router = createBrowserRouter([
     {
@@ -66,6 +71,24 @@ const router = createBrowserRouter([
             {
                 path:'/dashboard/all-buyers',
                 element:<AdminRoute><AllBuyers></AllBuyers></AdminRoute>
+            },
+        ]
+    },
+    {
+        path: '/buyer-dashboard',
+        element: <PrivateRoute><BuyerboardLayout></BuyerboardLayout></PrivateRoute>,
+        children:[
+            {
+                path:'/buyer-dashboard',
+                element:<BuyerRoute><BuyerDashboard></BuyerDashboard></BuyerRoute>
+            },
+            {
+                path:'/buyer-dashboard/my-orders',
+                element:<BuyerRoute><MyOrders></MyOrders></BuyerRoute>
+            },
+            {
+                path:'/buyer-dashboard/my-wishlist',
+                element:<BuyerRoute><MyWishlist></MyWishlist></BuyerRoute>
             },
         ]
     },

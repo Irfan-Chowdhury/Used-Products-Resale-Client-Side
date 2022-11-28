@@ -8,19 +8,19 @@ const DashboardLayout = () => {
         <div>
             <Navbar></Navbar>
 
-            <div className="row">
+            <div className="row container">
                 <div className="col-md-3">
-                    <ul>
-                        <li><Link to='/dashboard/all-sellers'>Manage Sellers</Link></li>
-                        <li><Link to='/dashboard/all-buyers'>Manage Buyers</Link></li>
-                    </ul>
+                    <div id="list-example" class="list-group">
+                        <Link class="list-group-item list-group-item-action" to='/dashboard/all-sellers'>Manage Sellers</Link>
+                        <Link class="list-group-item list-group-item-action" to='/dashboard/all-buyers'>Manage Buyers</Link>
+                    </div>
                 </div>
                 <div className="col-md-9">
                     <Outlet></Outlet>
                 </div>
             </div>
-            
-            <div style={{marginBottom:'150px'}}></div>
+
+            <div style={{ marginBottom: '150px' }}></div>
 
             <Footer></Footer>
         </div>

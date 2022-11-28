@@ -9,7 +9,13 @@
 - Product create, edit, delete
 - Authorization
 - Category Wise Product Show
+- Payment Gateway Stripe
 
+
+## `Admin Credentials`
+Email: admin@gmail.com
+<br>
+Password: admin@gmail.com
 
 ## `PACKAGES SETUP`
 #### 1. Create [React](https://reactjs.org/) App
@@ -87,6 +93,10 @@ npm install react-hook-form
 ```bash
 npm install date-fns --save
 ```
+#### 12. [Axios](https://www.npmjs.com/package/axios)
+```bash
+npm install axios
+```
 
 <br>
 
@@ -144,4 +154,12 @@ firebase deploy
 ```
 
 #### 5. The you will get a Hosting URL: https://xyz.web.app
+
+#### 6. Then after any changing, every time you have to use this command -
+```bash
+1. npm run build 
+2. Firebase deploy
+```
+
+
 
