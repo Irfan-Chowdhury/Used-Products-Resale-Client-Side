@@ -19,6 +19,7 @@ import BuyerDashboard from "../../Pages/BuyerDashboard/BuyerDashboard";
 import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import MyOrders from "../../Pages/BuyerDashboard/MyOrders/MyOrders";
 import MyWishlist from "../../Pages/BuyerDashboard/MyWishlist/MyWishlist";
+import Checkout from "../../Pages/BuyerDashboard/Checkout/Checkout";
 
 const router = createBrowserRouter([
     {
@@ -89,6 +90,11 @@ const router = createBrowserRouter([
             {
                 path:'/buyer-dashboard/my-wishlist',
                 element:<BuyerRoute><MyWishlist></MyWishlist></BuyerRoute>
+            },
+            {
+                path:'/buyer-dashboard/orders/checkout/:id',
+                element:<BuyerRoute><Checkout></Checkout></BuyerRoute>,
+                loader: ({params}) => fetch(`http://localhost:5000/orders/checkout/${params.id}`)
             },
         ]
     },

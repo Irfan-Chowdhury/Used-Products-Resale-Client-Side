@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const MyOrders = () => {
     const {user} = useContext(AuthContext);
@@ -41,7 +42,7 @@ const MyOrders = () => {
                                 <th scope="row">{i+1}</th>
                                 <td>{order.product_title}</td>
                                 <td><img src={order.image} alt="" style={{height:'40px',width:'50px'}} /></td>
-                                <td>{order.price}</td>
+                                <td>৳ {order.price}</td>
                                 {
                                     order.order_status==='1' ?
                                     <td><span class="badge bg-success">Done</span></td>
@@ -57,7 +58,7 @@ const MyOrders = () => {
                                 {
                                     order.payment_status==='pending' ?
                                     <td>
-                                        <button className='btn btn-success'>Pay Now</button>
+                                        <Link to={`/buyer-dashboard/orders/checkout/${order._id}`} className='btn btn-success'>Pay Now</Link>
                                     </td>
                                     :
                                     <td>
