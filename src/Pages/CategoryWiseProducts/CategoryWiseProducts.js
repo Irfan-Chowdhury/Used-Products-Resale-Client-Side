@@ -1,13 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import useTitle from '../../hooks/useTitle';
 import { MdVerifiedUser } from 'react-icons/md';
 import BookingModal from './BookingModal/BookingModal';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const CategoryWiseProducts = () => {
     useTitle('Category Wise Products');
     const { _id, title } = useLoaderData();
+    const {successMessage} = useContext(AuthContext);
+
 
     const [products, setProducts] = useState([]);
     useEffect(() => {
@@ -28,7 +31,64 @@ const CategoryWiseProducts = () => {
         }
     });
 
-    // console.log(sellers);
+    const handleSubmit = event => {
+        event.preventDefault();
+        const form  = event.target;
+        const category_id = _id;
+        const product_id = form.product_id.value;
+        const image = form.image.value;
+        const order_status = form.order_status.value;
+        const payment_status = form.payment_status.value;
+        const payment_method = form.payment_method.value;
+        const seller_name = form.seller_name.value;
+        const seller_email = form.seller_email.value;
+        const date = form.date.value;
+        const buyer_name = form.buyer_name.value;
+        const buyer_email = form.buyer_email.value;
+        const price = form.price.value;
+        const buyer_phone = form.buyer_phone.value;
+        const meeting_location = form.meeting_location.value;
+
+        const order = {
+            category_id,
+            product_id,
+            image,
+            order_status,
+            payment_status,
+            payment_method,
+            seller_name,
+            seller_email,
+            date,
+            buyer_name,
+            buyer_email,
+            price,
+            buyer_phone,
+            meeting_location
+        };
+
+        fetch('http://localhost:5000/orders', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json', 
+                // authorization: `bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(order)
+        })
+        .then(res => res.json())
+        .then(result =>{
+            console.log(result);
+            if(result.acknowledged){
+               form.reset();
+               successMessage();
+            }
+            // setLoading(false);
+            // successMessage();
+            // navigate('/my-products')
+        })
+        .catch(err => console.error(err));
+
+    }
+
 
 
 
@@ -65,7 +125,7 @@ const CategoryWiseProducts = () => {
                                 </div>
                             </div>
 
-                            <BookingModal product={product}></BookingModal>
+                            <BookingModal handleSubmit={handleSubmit} product={product}></BookingModal>
                         </div>
                     )
                 }
