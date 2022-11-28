@@ -9,6 +9,9 @@
 - Product create, edit, delete
 - Authorization
 - Category Wise Product Show
+- Admin Dashboard
+- Seller Dashboard
+- Buyer Dashboard
 - Payment Gateway Stripe
 
 

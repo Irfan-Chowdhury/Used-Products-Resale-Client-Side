@@ -58,6 +58,7 @@ const CategoryWiseProducts = () => {
         const form  = event.target;
         const category_id = _id;
         const product_id = form.product_id.value;
+        const product_title = form.product_title.value;
         const image = form.image.value;
         const order_status = form.order_status.value;
         const payment_status = form.payment_status.value;
@@ -74,6 +75,7 @@ const CategoryWiseProducts = () => {
         const order = {
             category_id,
             product_id,
+            product_title,
             image,
             order_status,
             payment_status,

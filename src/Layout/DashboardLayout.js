@@ -10,9 +10,9 @@ const DashboardLayout = () => {
 
             <div className="row container">
                 <div className="col-md-3">
-                    <div id="list-example" class="list-group">
-                        <Link class="list-group-item list-group-item-action" to='/dashboard/all-sellers'>Manage Sellers</Link>
-                        <Link class="list-group-item list-group-item-action" to='/dashboard/all-buyers'>Manage Buyers</Link>
+                    <div id="list-example" className="list-group">
+                        <Link className="list-group-item list-group-item-action" to='/dashboard/all-sellers'>Manage Sellers</Link>
+                        <Link className="list-group-item list-group-item-action" to='/dashboard/all-buyers'>Manage Buyers</Link>
                     </div>
                 </div>
                 <div className="col-md-9">
