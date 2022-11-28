@@ -41,8 +41,8 @@ const Home = () => {
                                     {/* <p className="card-text"> <b>Posted By:</b> {product.seller_name} </p>
                                     <p className="card-text"> <b>Phone:</b> {product.phone} </p> */}
                                    
-                                    {/* <div class="d-grid gap-2">
-                                        <Link to='/' class="btn btn-primary">Book Now</Link>
+                                    {/* <div className="d-grid gap-2">
+                                        <Link to='/' className="btn btn-primary">Book Now</Link>
                                     </div>  */}
                                 </div>
                             </div>

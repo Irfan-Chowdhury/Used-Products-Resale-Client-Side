@@ -13,6 +13,7 @@ import NotFound404 from "../../Pages/Shared/NotFound404/NotFound404";
 import SignUp from "../../Pages/SignUp/SignUp";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import AdminRoute from "../AdminRoute/AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -56,15 +57,15 @@ const router = createBrowserRouter([
         children:[
             {
                 path:'/dashboard',
-                element:<Dashboard></Dashboard>
+                element:<AdminRoute><Dashboard></Dashboard></AdminRoute>
             },
             {
                 path:'/dashboard/all-sellers',
-                element:<AllSellers></AllSellers>
+                element:<AdminRoute><AllSellers></AllSellers></AdminRoute>
             },
             {
                 path:'/dashboard/all-buyers',
-                element:<AllBuyers></AllBuyers>
+                element:<AdminRoute><AllBuyers></AllBuyers></AdminRoute>
             },
         ]
     },

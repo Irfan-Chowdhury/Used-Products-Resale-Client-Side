@@ -63,7 +63,7 @@ const AllSellers = () => {
         <div>
             <h3 className='text-center'>All Sellers</h3>
             <hr />
-            <table class="table">
+            <table className="table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -76,7 +76,7 @@ const AllSellers = () => {
                 <tbody>
                     {
                         sellers?.map((seller, i) => 
-                            <tr>
+                            <tr key={seller._id}>
                                 <th scope="row">{i+1}</th>
                                 <td>{seller.name}</td>
                                 <td>{seller.email}</td>

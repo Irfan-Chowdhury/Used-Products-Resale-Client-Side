@@ -40,7 +40,7 @@ const AllBuyers = () => {
         <div>
             <h3 className='text-center'>All Buyers</h3>
             <hr />
-            <table class="table">
+            <table className="table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -52,7 +52,7 @@ const AllBuyers = () => {
                 <tbody>
                     {
                         buyers?.map((buyer, i) => 
-                            <tr>
+                            <tr key={buyer._id}>
                                 <th scope="row">{i+1}</th>
                                 <td>{buyer.name}</td>
                                 <td>{buyer.email}</td>  
