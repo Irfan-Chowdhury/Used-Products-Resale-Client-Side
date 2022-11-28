@@ -16,9 +16,19 @@
 
 
 ## `Admin Credentials`
-Email: admin@gmail.com
+adminEmail: admin@gmail.com
 <br>
-Password: admin@gmail.com
+adminEmail: admin@gmail.com
+
+## `Seller Credentials`
+sellerEmail: irfanchowdhury80@gmail.com
+<br>
+sellerPassword: irfanchowdhury80@gmail.com
+
+## `Buyer Credentials`
+buyerEmail: buyer@gmail.com
+<br>
+buyerPassword: 123456
 
 ## `PACKAGES SETUP`
 #### 1. Create [React](https://reactjs.org/) App
