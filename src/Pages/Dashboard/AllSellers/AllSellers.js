@@ -11,7 +11,7 @@ const AllSellers = () => {
     const {data: sellers = [], refetch} = useQuery({
         queryKey: ['sellers'],
         queryFn: async() =>{
-            const res = await fetch('http://localhost:5000/all-sellers');
+            const res = await fetch('https://used-products-resale-market-server.vercel.app/all-sellers');
             const data = await res.json();
             return data;
         }
@@ -23,7 +23,7 @@ const AllSellers = () => {
             verify: verifyValue
         };
 
-        fetch(`http://localhost:5000/all-sellers/${id}`, {
+        fetch(`https://used-products-resale-market-server.vercel.app/all-sellers/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
@@ -43,7 +43,7 @@ const AllSellers = () => {
     const handleDeleteSeller = id => {
         const proceed = window.confirm('Are you sure to delete ?');
         if (proceed) {
-            fetch(`http://localhost:5000/users/${id}`, {
+            fetch(`https://used-products-resale-market-server.vercel.app/users/${id}`, {
                 method: 'DELETE', 
                 // headers: {
                 //     authorization: `bearer ${localStorage.getItem('accessToken')}`

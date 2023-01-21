@@ -9,7 +9,7 @@ const Home = () => {
 
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/all-available-and-advertise-products')
+        fetch('https://used-products-resale-market-server.vercel.app/all-available-and-advertise-products')
         .then(res => res.json())
         .then(productData => {
             setProducts(productData)

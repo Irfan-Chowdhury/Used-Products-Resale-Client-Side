@@ -5,6 +5,7 @@ import useTitle from '../../hooks/useTitle';
 import { MdVerifiedUser } from 'react-icons/md';
 import BookingModal from './BookingModal/BookingModal';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import Wishlist from './Wishlist/Wishlist';
 
 const CategoryWiseProducts = () => {
     useTitle('Category Wise Products');
@@ -12,45 +13,46 @@ const CategoryWiseProducts = () => {
     const {user, successMessage} = useContext(AuthContext);
 
 
-    const [products, setProducts] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:5000/all-available-products')
-        .then(res => res.json())
-        .then(productData => {
-            const productsFilter = productData.filter(product => product.category_id === _id);
-            setProducts(productsFilter)
-        });
-    });
-
-    // const {data: products=[], refetch} = useQuery({
-    //     queryKey: ['products'],
-    //     queryFn: async() =>{
-    //         const res = await fetch('all-available-products');
-    //         const data = await res.json();
-    //         return data.filter(product => product.category_id === _id);
-    //     }
+    // const [products, setProducts] = useState([]);
+    // useEffect(() => {
+    //     fetch('https://used-products-resale-market-server.vercel.app/all-available-products')
+    //     .then(res => res.json())
+    //     .then(productData => {
+    //         const productsFilter = productData.filter(product => product.category_id === _id);
+    //         setProducts(productsFilter)
+    //     });
     // });
+
+    const {data: products=[]} = useQuery({
+        queryKey: ['products'],
+        queryFn: async() =>{
+            const res = await fetch('https://used-products-resale-market-server.vercel.app/all-available-products');
+            const data = await res.json();
+            return data.filter(product => product.category_id === _id);
+        }
+    });
 
 
 
     const { data: sellers = [] } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/all-sellers');
+            const res = await fetch('https://used-products-resale-market-server.vercel.app/all-sellers');
             const data = await res.json();
             return data;
         }
     });
 
 
-    const [orders, setOrders] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:5000/orders')
-        .then(res => res.json())
-        .then(data => {
-            setOrders(data)
-        });
-    },[])
+    const { data: orders = [], refetch } = useQuery({
+        queryKey: ['orders'],
+        queryFn: async () => {
+            const res = await fetch('https://used-products-resale-market-server.vercel.app/orders');
+            const data = await res.json();
+            return data;
+        }
+    });
+
 
 
     const handleSubmit = event => {
@@ -87,10 +89,12 @@ const CategoryWiseProducts = () => {
             buyer_email,
             price,
             buyer_phone,
-            meeting_location
+            meeting_location,
+            card_number:'',
+            date_format_cbc:'',
         };
 
-        fetch('http://localhost:5000/orders', {
+        fetch('https://used-products-resale-market-server.vercel.app/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json', 
@@ -103,6 +107,7 @@ const CategoryWiseProducts = () => {
                 console.log(result);
                 if(result.acknowledged){
                 form.reset();
+                refetch();
                 successMessage();
             }
         })
@@ -128,6 +133,11 @@ const CategoryWiseProducts = () => {
                                             <b>Posted By:</b> {product.seller_name}
                                             {
                                                 sellers.length > 0 &&
+                                                    // <>
+                                                    //     <h6 className='text-danger'>{product.seller_email}</h6>
+                                                    //     <h6 className='text-danger'>{products.length}</h6>
+                                                    //     <h6 className='text-danger'>{sellers?.find(seller => seller.email).verify}</h6>
+                                                    // </>
                                                     sellers?.find(seller => seller.email === product.seller_email).verify === 1 ?
                                                     <span className="ms-1 text-success"><MdVerifiedUser></MdVerifiedUser></span>
                                                     :
@@ -144,8 +154,12 @@ const CategoryWiseProducts = () => {
                                                     orders?.find(order => order.product_id === product._id) ?
                                                     <button type='button' className="btn btn-warning">Already Booked</button>
                                                     :
-                                                    <Link to='/' className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#bookingModal-${product._id}`}>Book Now</Link>
+                                                    <>
+                                                        <Link to='/' className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#bookingModal-${product._id}`}>Book Now</Link>
+                                                        <Wishlist category_id={_id} product={product}></Wishlist>
+                                                    </>
                                             }
+
                                         </div>
                                     </div>
                                 </div>
@@ -156,9 +170,6 @@ const CategoryWiseProducts = () => {
                 }
 
             </div>
-
-
-
         </div>
     );
 };

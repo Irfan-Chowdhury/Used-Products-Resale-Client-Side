@@ -7,7 +7,7 @@ const MyOrders = () => {
     const {user} = useContext(AuthContext);
     const [orders, setOrders] = useState([]);
 
-    axios.get(`http://localhost:5000/orders/${user.email}`)
+    axios.get(`https://used-products-resale-market-server.vercel.app/orders/${user.email}`)
     .then(function (response) {
         setOrders(response.data);
     })
@@ -45,15 +45,15 @@ const MyOrders = () => {
                                 <td>৳ {order.price}</td>
                                 {
                                     order.order_status==='1' ?
-                                    <td><span class="badge bg-success">Done</span></td>
+                                    <td><span className="badge bg-success">Done</span></td>
                                     :
-                                    <td><span class="badge bg-dark">Pending</span></td>
+                                    <td><span className="badge bg-dark">Pending</span></td>
                                 }
                                 {
                                     order.payment_status==='pending' ?
-                                    <td><span class="badge bg-danger">Pending</span></td>
+                                    <td><span className="badge bg-danger">Pending</span></td>
                                     :
-                                    <td><span class="badge bg-success">Done</span></td>
+                                    <td><span className="badge bg-success">Done</span></td>
                                 }
                                 {
                                     order.payment_status==='pending' ?

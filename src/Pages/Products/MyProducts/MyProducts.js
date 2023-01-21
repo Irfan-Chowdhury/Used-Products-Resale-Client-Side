@@ -11,13 +11,13 @@ const MyProducts = () => {
     // All Categories
     const [categories, setCategories] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/categories')
+        fetch('https://used-products-resale-market-server.vercel.app/categories')
         .then(res => res.json())
         .then(data => setCategories(data))
     })
 
     // Products fetch by current user email
-    const url = `http://localhost:5000/products?seller_email=${user?.email}`;
+    const url = `https://used-products-resale-market-server.vercel.app/products?seller_email=${user?.email}`;
     const { data: products = [],refetch} = useQuery({
         queryKey: ['products', user?.email],
         queryFn: async () => {
@@ -35,7 +35,7 @@ const MyProducts = () => {
         const productData = {
             advertise: advertiseValue
         };
-        fetch(`http://localhost:5000/products/${productId}`,{
+        fetch(`https://used-products-resale-market-server.vercel.app/products/${productId}`,{
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -54,7 +54,7 @@ const MyProducts = () => {
     const handleDelete = (productId) => {
         const proceed = window.confirm('Are you sure to delete ?');
         if (proceed) {
-            fetch(`http://localhost:5000/products/${productId}`, {
+            fetch(`https://used-products-resale-market-server.vercel.app/products/${productId}`, {
                 method: 'DELETE'
             })
             .then(res => res.json())

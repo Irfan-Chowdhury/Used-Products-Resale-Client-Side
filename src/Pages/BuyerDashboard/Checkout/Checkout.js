@@ -12,7 +12,6 @@ const Checkout = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        event.preventDefault();
         const form  = event.target;
         const card_number = form.card_number.value;
         const date_format_cbc = form.date_format_cbc.value;
@@ -26,7 +25,7 @@ const Checkout = () => {
             date_format_cbc,
         };
 
-        fetch(`http://localhost:5000/orders/checkout/${_id}`, {
+        fetch(`https://used-products-resale-market-server.vercel.app/orders/checkout/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json', 
@@ -55,28 +54,28 @@ const Checkout = () => {
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3 row">
-                            <label for="staticEmail" className="col-sm-4 col-form-label"><b>Product Title :</b></label>
+                            <label htmlFor="staticEmail" className="col-sm-4 col-form-label"><b>Product Title :</b></label>
                             <div className="col-sm-8">
-                                <input type="text" readonly className="form-control-plaintext" id="staticEmail" defaultValue={product_title}/>
+                                <input type="text" readOnly className="form-control-plaintext" id="staticEmail" defaultValue={product_title}/>
                             </div>
                         </div>
                         <div className="mb-3 row">
-                            <label for="staticEmail" className="col-sm-4 col-form-label"><b>Product Price (BDT) :</b></label>
+                            <label htmlFor="staticEmail" className="col-sm-4 col-form-label"><b>Product Price (BDT) :</b></label>
                             <div className="col-sm-8">
-                                <input type="text" readonly className="form-control-plaintext" id="staticEmail" defaultValue={price}/>
+                                <input type="text" readOnly className="form-control-plaintext" id="staticEmail" defaultValue={price}/>
                             </div>
                         </div>
 
                         <h5 className='text-primary mt-5'>Strpie Information</h5>
                         <hr />
                         <div className="mb-3 row">
-                            <label for="staticEmail" className="col-sm-4 col-form-label"><b>Card Number :</b></label>
+                            <label htmlFor="staticEmail" className="col-sm-4 col-form-label"><b>Card Number :</b></label>
                             <div className="col-sm-8">
                                 <input type="text" required name='card_number' className="form-control" placeholder='Card Number'/>
                             </div>
                         </div>
                         <div className="mb-3 row">
-                            <label for="staticEmail" className="col-sm-4 col-form-label"><b>Format :</b></label>
+                            <label htmlFor="staticEmail" className="col-sm-4 col-form-label"><b>Format :</b></label>
                             <div className="col-sm-8">
                                 <input type="text" required name='date_format_cbc' className="form-control" placeholder='MM/YY CBC'/>
                             </div>

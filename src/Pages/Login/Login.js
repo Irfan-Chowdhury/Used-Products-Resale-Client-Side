@@ -6,6 +6,8 @@ import login from '../../assets/login.jpg'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useTitle from '../../hooks/useTitle';
 import { GoogleAuthProvider } from 'firebase/auth';
+import { useQuery } from '@tanstack/react-query';
+
 
 const Login = () => {
     useTitle('Login');
@@ -14,6 +16,15 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
+
+    const { data: users = [] } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await fetch('https://used-products-resale-market-server.vercel.app/users');
+            const data = await res.json();
+            return data;
+        }
+    });
 
     const handleLogin = event => {
         event.preventDefault();
@@ -56,27 +67,18 @@ const Login = () => {
     const handleGoogleSignIn = () => {
         providerLogin(googleProvider)
         .then(result => {
-            // const user = result.user;
-            // const currentuser = {
-            //     email: user.email
-            // }
 
-            // get JWT token
-            // fetch('https://service-review-server-murex.vercel.app/jwt',{
-            //     method:'POST',
-            //     headers:{
-            //         'content-type':'application/json'
-            //     },
-            //     body:JSON.stringify(currentuser)
-            // })
-            // .then(res => res.json())
-            // .then(data => {
-            //     // local storage is the easiest but not the best place to store jwt token
-            //     localStorage.setItem('travelServiceToken',data.token);
-            //     navigate(from, {replace:true});
-            // });
-            // console.log(user);
-            navigate(from, {replace:true});
+            const role  = 'buyer';
+            const verify= 0;
+            
+            if (users.find(user => user.email===result.user.email)) {
+                // console.log('Exists');
+                navigate(from, {replace:true});
+            }else{
+                // console.log('Does Not Exists');
+                saveUser(result.user.displayName, result.user.email, result.user.photoURL, role, verify);
+                navigate(from, {replace:true});
+            }
         })
         .catch(error => {
             console.error(error)
@@ -84,6 +86,22 @@ const Login = () => {
         });
     }
     
+
+    const saveUser = (name, email, photoURL, role,verify) =>{
+        const user ={name, email, photoURL, role,verify};
+        fetch('https://used-products-resale-market-server.vercel.app/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data =>{
+            navigate(from, {replace:true});
+        })
+        .catch(err => console.error(err));
+    }
 
 
 

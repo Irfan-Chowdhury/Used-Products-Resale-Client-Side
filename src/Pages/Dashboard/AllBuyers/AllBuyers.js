@@ -9,7 +9,7 @@ const AllBuyers = () => {
     const {data: buyers = [], refetch} = useQuery({
         queryKey: ['buyers'],
         queryFn: async() =>{
-            const res = await fetch('http://localhost:5000/all-buyers');
+            const res = await fetch('https://used-products-resale-market-server.vercel.app/all-buyers');
             const data = await res.json();
             return data;
         }
@@ -20,7 +20,7 @@ const AllBuyers = () => {
     const handleDeleteSeller = id => {
         const proceed = window.confirm('Are you sure to delete ?');
         if (proceed) {
-            fetch(`http://localhost:5000/users/${id}`, {
+            fetch(`https://used-products-resale-market-server.vercel.app/users/${id}`, {
                 method: 'DELETE', 
                 // headers: {
                 //     authorization: `bearer ${localStorage.getItem('accessToken')}`

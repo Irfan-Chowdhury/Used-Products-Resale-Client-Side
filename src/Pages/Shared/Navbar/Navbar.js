@@ -26,7 +26,7 @@ const Navbar = () => {
     // const {data: sellers = []} = useQuery({
     //     queryKey: ['sellers'],
     //     queryFn: async() =>{
-    //         const res = await fetch('http://localhost:5000/all-sellers');
+    //         const res = await fetch('https://used-products-resale-market-server.vercel.app/all-sellers');
     //         const data = await res.json();
     //         return data;
     //     }
@@ -34,7 +34,7 @@ const Navbar = () => {
 
     const [seller, setSeller] = useState(null);
     useEffect(() => {
-        fetch(`http://localhost:5000/users/seller/${email}`)
+        fetch(`https://used-products-resale-market-server.vercel.app/users/seller/${email}`)
         .then(res => res.json())
         .then(data => setSeller(data))
     });
